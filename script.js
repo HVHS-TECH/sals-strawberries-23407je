@@ -5,9 +5,6 @@ function writeForm(){
     // Get the form data
     const favoriteFruit = document.getElementById("favoriteFruit").value;
 }
-function fb_authenticate() {
-    AuthenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
-}
 function fb_handleLogin(_User) {
     if (_User) {
         console.log("User are already logged in");

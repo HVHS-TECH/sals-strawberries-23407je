@@ -7,9 +7,9 @@
  **************************************************************
  **************************************************************/
 function fb_authenticate(){
-    // authenticate with Google
+     AuthenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin, fb_error);
 }
-
-function fb_error(){
-    // Don't forget your error handling!
+function fb_error(error){
+console.log("there was an error reading the message");
+console.error(error);
 }
