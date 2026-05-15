@@ -6,10 +6,10 @@
  **                                                          **
  **************************************************************
  **************************************************************/
-function fb_authenticate(){
-     AuthenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin, fb_error);
-}
 function fb_error(error){
 console.log("there was an error reading the message");
 console.error(error);
+}
+function fb_authenticate(){
+     AuthenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin, fb_error);
 }

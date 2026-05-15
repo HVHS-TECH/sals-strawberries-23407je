@@ -1,15 +1,15 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCZg-gtpgx2GffckokHsP8w-P5vyZnQPD0",
-  authDomain: "joshua-earp-12comp.firebaseapp.com",
-  databaseURL: "https://joshua-earp-12comp-default-rtdb.firebaseio.com",
-  projectId: "joshua-earp-12comp",
-  storageBucket: "joshua-earp-12comp.firebasestorage.app",
-  messagingSenderId: "859205823509",
-  appId: "1:859205823509:web:459eb5a0f82280fdf4721c"
+  apiKey: "AIzaSyB-sNavt2IfLsvCQqbvP_TWkkfyKrMuUrc",
+  authDomain: "comp-firebase-mini-project.firebaseapp.com",
+  databaseURL: "https://comp-firebase-mini-project-default-rtdb.firebaseio.com",
+  projectId: "comp-firebase-mini-project",
+  storageBucket: "comp-firebase-mini-project.firebasestorage.app",
+  messagingSenderId: "457653368279",
+  appId: "1:457653368279:web:4c9628458d2fde79384792"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig)
 
 console.log("firebase initilize finished");
 console.log(firebase);

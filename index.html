@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sal’s Strawberry Saloon</title>
+  <title>Sals Strawberry Saloon</title>
   <link rel="stylesheet" href="style.css" />
 
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
@@ -13,11 +13,14 @@
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
 
+  <script src="fb_setup.js"></script>
+  <script src="fb_io.js"></script>
+
 </head>
 
 <body>
   <div class="container">
-    <h1>Sal’s Strawberry Saloon</h1>
+    <h1>Sals Strawberry Saloon</h1>
     <h2>(and other fruit products)</h2>
 
     <button onclick="fb_authenticate()">Login with Google</button>
@@ -36,10 +39,8 @@
     </form>
 
     <button onclick="fb_write()">Submit</button>
-
+  <div id="databaseOutput"></div>
     <p id="statusMessage"></p>
-  </div>  <script src="fb_setup.js"></script>
-  <script src="fb_io.js"></script>
   <script src="script.js"></script>
 </body>
 
