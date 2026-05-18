@@ -1,15 +1,19 @@
 
 console.log("Running Sal's Strawberries")
 const HTML_OUTPUT = document.getElementById("databaseOutput");
-var AuthenticationListener
+let authenticationListener
 let GLOBAL_User;
+SalsStrawberries = {
+ Users: {
+
+}
+}
+
 function writeForm(){
     // Get the form data
-    const favoriteFruit = document.getElementById("favoriteFruit").value;
+    const favouriteFruit = document.getElementById("favoriteFruit").value;
     const name = document.getElementById("name").value;
     const fruitQuantity = document.getElementById("fruitQuantity").value;
-
-     .[;'.database().ref('/').set(favoriteFruit);
 }
 
 function fb_handleLogin(_User) {
@@ -23,14 +27,24 @@ function fb_handleLogin(_User) {
         loginWithGoogle();
     }
 }
+
 function loginWithGoogle() {
-    var provider = new firebase.auth.GoogleAuthProvider();
+    let provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider).then((result) => {
         GLOBAL_User = result.user;
         console.log("User has logged in");
+        console.log(GLOBAL_User);
     });
 }
+
+function fb_logout(){
+authenticationListener();
+firebase.auth().signOut();
+console.log("user has logged out");
+}
+
 function fb_write() {
+    writeForm();
 
 }
