@@ -4,12 +4,16 @@ const HTML_OUTPUT = document.getElementById("databaseOutput");
 let authenticationListener
 let GLOBAL_User;
 SalsStrawberries = {
- Users: {
-
+    SalsStrawberries: {
+        Users: {
+            Message: "Here is every google users name data"
+        },
+    },
 }
-}
 
-function writeForm(){
+    firebase.database().ref('/').update(SalsStrawberries);
+
+function writeForm() {
     // Get the form data
     const favouriteFruit = document.getElementById("favoriteFruit").value;
     const name = document.getElementById("name").value;
@@ -21,6 +25,11 @@ function fb_handleLogin(_User) {
         console.log("User is logged in");
         HTML_OUTPUT.innerHTML += "<br>" + "You are logged in";
         GLOBAL_User = _User;
+        firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid).update(
+            {
+                name: GLOBAL_User.displayName
+            }
+        );
     } else {
         console.log("User has not logged in");
         HTML_OUTPUT.innerHTML = "You are not actively logged in" + "<br>" + "Please log in with the current popup.";
@@ -38,13 +47,13 @@ function loginWithGoogle() {
     });
 }
 
-function fb_logout(){
-authenticationListener();
-firebase.auth().signOut();
-console.log("user has logged out");
+function fb_logout() {
+    authenticationListener();
+    firebase.auth().signOut();
+    console.log("user has logged out");
 }
 
 function fb_write() {
     writeForm();
-
+    console.log(GLOBAL_User);
 }
