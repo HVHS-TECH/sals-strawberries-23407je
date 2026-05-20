@@ -13,17 +13,11 @@ SalsStrawberries = {
 
     firebase.database().ref('/').update(SalsStrawberries);
 
-function writeForm() {
-    // Get the form data
-    const favouriteFruit = document.getElementById("favoriteFruit").value;
-    const name = document.getElementById("name").value;
-    const fruitQuantity = document.getElementById("fruitQuantity").value;
-}
 
 function fb_handleLogin(_User) {
     if (_User) {
         console.log("User is logged in");
-        HTML_OUTPUT.innerHTML += "<br>" + "You are logged in";
+        HTML_OUTPUT.innerHTML = "<br>" + "You are logged in";
         GLOBAL_User = _User;
         firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid).update(
             {
@@ -53,7 +47,24 @@ function fb_logout() {
     console.log("user has logged out");
 }
 
+function writeForm() {
+    // Get the form data
+    const favouriteFruit = document.getElementById("favoriteFruit").value;
+    const fruitQuantity = document.getElementById("fruitQuantity").value;
+    firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid).update(
+        {
+            favFruit: favouriteFruit,
+            quantity: fruitQuantity
+        }
+    );
+}
+
 function fb_write() {
     writeForm();
     console.log(GLOBAL_User);
+let emailStart = ["Dear", "Hello", "Goodmorrow", "Fine day"];
+let startIndex = Math.floor(Math.random() * emailStart.length);
+let startResponse = emailStart[startIndex];
+HTML_OUTPUT.innerHTML = startResponse + " " + GLOBAL_User.displayName + " I hear your favourite fruit is "
 }
+
