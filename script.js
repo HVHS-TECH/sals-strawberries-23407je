@@ -11,7 +11,7 @@ SalsStrawberries = {
     },
 }
 
-    firebase.database().ref('/').update(SalsStrawberries);
+firebase.database().ref('/').update(SalsStrawberries);
 
 
 function fb_handleLogin(_User) {
@@ -62,9 +62,19 @@ function writeForm() {
 function fb_write() {
     writeForm();
     console.log(GLOBAL_User);
-let emailStart = ["Dear", "Hello", "Goodmorrow", "Fine day"];
-let startIndex = Math.floor(Math.random() * emailStart.length);
-let startResponse = emailStart[startIndex];
-HTML_OUTPUT.innerHTML = startResponse + " " + GLOBAL_User.displayName + " I hear your favourite fruit is "
+    firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid + '/favFruit').on('value', displaydata, fb_error);
 }
+function displaydata(snapshot) {
+    let emailStart = ["Dear", "Hello", "Goodmorrow", "Fine day"];
+    let startIndex = Math.floor(Math.random() * emailStart.length);
+    let startResponse = emailStart[startIndex];
 
+    let emailOpinion = [" well I wont judge you", ". Thats my favourite fruit as well", ". I find them overrated but they are nice", " and damn taste really nice"];
+    let opinionIndex = Math.floor(Math.random() * emailOpinion.length);
+    let opinionResponse = emailOpinion[opinionIndex];
+
+    let fruitdata = snapshot.val();
+
+    let discount = Math.round(Math.random() * 80);
+    HTML_OUTPUT.innerHTML = startResponse + " " + GLOBAL_User.displayName + " I hear your favourite fruit is the " + fruitdata + opinionResponse + ". Well because you were apart of the survey I would like to give you " + discount + "% off for joining us today!!"
+}
