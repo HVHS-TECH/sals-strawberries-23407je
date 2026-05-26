@@ -21,7 +21,8 @@ function fb_handleLogin(_User) {
         GLOBAL_User = _User;
         firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid).update(
             {
-                name: GLOBAL_User.displayName
+                name: GLOBAL_User.displayName,
+                email: GLOBAL_User.email
             }
         );
     } else {
@@ -29,6 +30,9 @@ function fb_handleLogin(_User) {
         HTML_OUTPUT.innerHTML = "You are not actively logged in" + "<br>" + "Please log in with the current popup.";
         loginWithGoogle();
     }
+    if (GLOBAL_User.uid == "h1nH68fOsrZcCeUz0XxjdfH9xEz1") {
+    console.log("hello");
+}
 }
 
 function loginWithGoogle() {
