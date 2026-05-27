@@ -1,43 +1,36 @@
 
 console.log("Running Sal's Strawberries")
 const HTML_OUTPUT = document.getElementById("databaseOutput");
-let authenticationListener
+let authenticationListener;
 let GLOBAL_User;
-SalsStrawberries = {
-    SalsStrawberries: {
-        Users: {
-            Message: "Here is every google users name data"
-        },
-    },
-}
+let loginCheck;
 
-firebase.database().ref('/').update(SalsStrawberries);
+async function fb_handleLogin(_User) {
 
-
-function fb_handleLogin(_User) {
     if (_User) {
-        console.log("User is logged in");
-        HTML_OUTPUT.innerHTML = "<br>" + "You are logged in";
+        HTML_OUTPUT.innerHTML = "Please wait for the login." + "<br>" + "This will not take long."
         GLOBAL_User = _User;
-        firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid).update(
+        await firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid).update(
             {
                 name: GLOBAL_User.displayName,
                 email: GLOBAL_User.email
             }
         );
+        loginCheck = "loginStored"
+        console.log("User is logged in");
+        HTML_OUTPUT.innerHTML = "You are logged in";
     } else {
         console.log("User has not logged in");
         HTML_OUTPUT.innerHTML = "You are not actively logged in" + "<br>" + "Please log in with the current popup.";
         loginWithGoogle();
     }
     if (GLOBAL_User.uid == "h1nH68fOsrZcCeUz0XxjdfH9xEz1") {
-    console.log("hello");
-}
+        console.log("hello");
+    }
 }
 
 function loginWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();
-
     firebase.auth().signInWithPopup(provider).then((result) => {
         GLOBAL_User = result.user;
         console.log("User has logged in");
@@ -49,6 +42,7 @@ function fb_logout() {
     authenticationListener();
     firebase.auth().signOut();
     console.log("user has logged out");
+    HTML_OUTPUT.innerHTML = "You have logged out, thank you for joining us today."
 }
 
 function writeForm() {
@@ -64,9 +58,15 @@ function writeForm() {
 }
 
 function fb_write() {
-    writeForm();
-    console.log(GLOBAL_User);
-    firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid + '/favFruit').on('value', displaydata, fb_error);
+    if (loginCheck == "loginStored") {
+        console.log("logged in");
+        writeForm();
+        console.log(GLOBAL_User);
+        firebase.database().ref('/SalsStrawberries/Users/' + GLOBAL_User.uid + '/favFruit').on('value', displaydata, fb_error);
+    } else {
+        console.log("not logged in");
+        HTML_OUTPUT.innerHTML = "Please log in before submitting."
+    }
 }
 function displaydata(snapshot) {
     let emailStart = ["Dear", "Hello", "Goodmorrow", "Fine day"];
